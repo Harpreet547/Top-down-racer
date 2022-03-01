@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Jump
+  - OverpassTrigger
+  - UnderpassTrigger
+  - OverpassCollider
+  - UnderpassCollider
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
@@ -53,6 +58,12 @@ TagManager:
     locked: 0
   - name: Cars
     uniqueID: 533592109
+    locked: 0
+  - name: Bridges
+    uniqueID: 1548605601
+    locked: 0
+  - name: OverpassSkidmarks
+    uniqueID: 2824147305
     locked: 0
   - name: Particles
     uniqueID: 3173449001
