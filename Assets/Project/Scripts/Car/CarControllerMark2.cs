@@ -38,6 +38,10 @@ public class CarControllerMark2 : MonoBehaviour {
         carSFXHandler = GetComponent<CarSFXHandler>();
     }
 
+    private void Start() {
+        rotationAngle = transform.rotation.eulerAngles.z;
+    }
+
     private void FixedUpdate() {
         ApplyEngineForce();
         KillOrthogonalVelocity();
