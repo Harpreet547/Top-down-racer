@@ -74,7 +74,6 @@ public class CarControllerMark2 : MonoBehaviour {
         float minSpeedBeforeAllowTurningFactor = (rb.velocity.magnitude / minSpeedTurningConstant);
         minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
 
-
         rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor * (accelerationInput >= 0 ? 1 : -1);
         rb.MoveRotation(rotationAngle);
     }
@@ -141,7 +140,7 @@ public class CarControllerMark2 : MonoBehaviour {
 
         carSFXHandler.PlayJumpSFX();
 
-        rb.AddForce(rb.velocity.normalized * 10 * jumpPushScale, ForceMode2D.Impulse);
+        rb.AddForce(10 * jumpPushScale * rb.velocity.normalized, ForceMode2D.Impulse);
 
         // Change sorting layer to avoid going under objects while jumping.
         carSpriteRenderer.sortingLayerName = "Flying";
@@ -158,7 +157,7 @@ public class CarControllerMark2 : MonoBehaviour {
             carShadowRenderer.transform.localScale = carSpriteRenderer.transform.localScale * 0.75f;
 
             // Offset the shadow a bit. This is not 100% correct either but works good enough.
-            carShadowRenderer.transform.localPosition = (new Vector3(1, -1, 0.0f)) * 3 * jumpHeightScale * jumpCurve.Evaluate(jumpCompletedPercentage);
+            carShadowRenderer.transform.localPosition = 3 * jumpCurve.Evaluate(jumpCompletedPercentage) * jumpHeightScale * new Vector3(1, -1, 0.0f);
 
             // When we reach 100% we are breaking the loop
             if(jumpCompletedPercentage == 1.0f) break;
