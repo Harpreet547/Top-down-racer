@@ -4,8 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 public class PositionHandler : MonoBehaviour {
+    LeaderboardUIHandler leaderboardUIHandler;
     List<CarLapCounter> carLapCounters = new List<CarLapCounter>();
-    private void Start() {
+    private void Awake() {
         CarLapCounter[] carLapCountersArray = FindObjectsOfType<CarLapCounter>();
         carLapCounters = carLapCountersArray.ToList<CarLapCounter>();
 
@@ -13,6 +14,11 @@ public class PositionHandler : MonoBehaviour {
         foreach (var carLapCounter in carLapCounters) {
             carLapCounter.OnPassCheckpoint += OnPassCheckpoint;
         }
+
+        leaderboardUIHandler = FindObjectOfType<LeaderboardUIHandler>();
+    }
+    private void Start() {
+        leaderboardUIHandler.UpdateList(carLapCounters);
     }
 
     void OnPassCheckpoint(CarLapCounter carLapCounter) {
@@ -23,5 +29,6 @@ public class PositionHandler : MonoBehaviour {
         int carPosition = carLapCounters.IndexOf(carLapCounter) + 1;
 
         carLapCounter.SetCarPosition(carPosition);
+        leaderboardUIHandler.UpdateList(carLapCounters);
     }
 }

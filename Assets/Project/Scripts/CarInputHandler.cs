@@ -25,7 +25,6 @@ public class CarInputHandler : MonoBehaviour {
         switch (playerNumber)
         {
             case 1:
-                Debug.Log(Input.GetAxis("Vertical_P1"));
                 inputVector.x = Input.GetAxis("Horizontal_P1");
                 inputVector.y = Input.GetAxis("Vertical_P1");
                 break;

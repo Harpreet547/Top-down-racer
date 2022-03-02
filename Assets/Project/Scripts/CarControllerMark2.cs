@@ -75,7 +75,7 @@ public class CarControllerMark2 : MonoBehaviour {
         minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
 
 
-        rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor * (accelerationInput > 0 ? 1 : -1);
+        rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor * (accelerationInput >= 0 ? 1 : -1);
         rb.MoveRotation(rotationAngle);
     }
 
