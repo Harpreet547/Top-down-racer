@@ -33,6 +33,12 @@ public class CarAIHandler : MonoBehaviour {
     WaypointNode[] allWaypoints;
     CarControllerMark2 carControllerMark2;
 
+    // Stuck handling
+    bool isRunningStuckCheck = false;
+    bool isFirstTemporaryWaypoint = false;
+    int stuckCheckCounter = 0;
+    List<Vector2> temporaryWaypoints = new List<Vector2>();
+
     private void Awake() {
         carControllerMark2 = GetComponent<CarControllerMark2>();
         allWaypoints = FindObjectsOfType<WaypointNode>();
