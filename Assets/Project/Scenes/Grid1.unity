@@ -1577,7 +1577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1675304157299017536, guid: 33369c19e7a55674a85ce6569ada4fac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.5
+      value: 12.95
       objectReference: {fileID: 0}
     - target: {fileID: 1675304157299017536, guid: 33369c19e7a55674a85ce6569ada4fac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5768,6 +5768,14 @@ PrefabInstance:
       propertyPath: aiMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 855584204419747527, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
+      propertyPath: skillLevel
+      value: 0.538
+      objectReference: {fileID: 0}
+    - target: {fileID: 855584204419747527, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
+      propertyPath: isAvoidingCars
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1063602143240397291, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -5826,7 +5834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063602143389334075, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1063602143389334075, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
       propertyPath: turnFactor
@@ -6059,6 +6067,10 @@ PrefabInstance:
     - target: {fileID: 1063602143389334087, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063602143389334087, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1063602143639950381, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
       propertyPath: m_Layer
@@ -6304,6 +6316,10 @@ PrefabInstance:
     - target: {fileID: 1063602143389334087, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063602143389334087, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1063602143639950381, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}
       propertyPath: m_Layer
