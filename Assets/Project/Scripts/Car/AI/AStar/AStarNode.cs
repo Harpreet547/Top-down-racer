@@ -41,4 +41,13 @@ public class AStarNode {
         fCostTotal = gCostDistanceFromStart + hCostDistanceFromGoal;
         isCostCalculated = true;
     }
+
+    public void Reset() {
+        // Do not reset neighbours as they will always be same.
+        isCostCalculated = false;
+        pickedOrder = 0;
+        gCostDistanceFromStart = 0;
+        hCostDistanceFromGoal = 0;
+        fCostTotal = 0;
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
 
 public class AStarLite : MonoBehaviour {
     int gridSizeX = 50;
@@ -19,11 +20,12 @@ public class AStarLite : MonoBehaviour {
     Vector3 startPositionDebug = new Vector3(1000, 0, 0);
     Vector3 destinationPositionDebug = new Vector3(1000, 0, 0);
     public Transform destinationTransform;
+    public bool isDebugActiveForCar = false;
 
     private void Start() {
         CreateGrid();
         // new Vector2(25, 5)
-        FindPath(destinationTransform.position);
+        // FindPath(destinationTransform.position);
     }
 
     void CreateGrid() {
@@ -90,8 +92,23 @@ public class AStarLite : MonoBehaviour {
         }
     }
 
+    private void Reset() {
+        nodesChecked.Clear();
+        nodesToCheck.Clear();
+        aiPath.Clear();
+
+        for (int x = 0; x < gridSizeX; x++) {
+            for (int y = 0; y < gridSizeY; y++) {
+                aStarNodes[x, y].Reset();
+            }
+        }
+    }
+
     public List<Vector2> FindPath(Vector2 destination) {
         if(aStarNodes == null) return null;
+
+        // Reset system so we can start from a fresh sitation.
+        Reset();
 
         Vector2Int destinationGridPoint = ConvertWorldToGridPosition(destination);
         Vector2Int currentPositionGridPoint = ConvertWorldToGridPosition(transform.position);
@@ -152,7 +169,7 @@ public class AStarLite : MonoBehaviour {
 
         aiPath = CreatePathForAI(currentPositionGridPoint);
 
-        return null;
+        return aiPath;
     }
 
     List<Vector2> CreatePathForAI(Vector2Int currentPositionGridPoint) {
@@ -183,15 +200,15 @@ public class AStarLite : MonoBehaviour {
                 }
             }
 
-            if(currentNode == startNode) isPathCreated = true;
+            if(currentNode == startNode) {
+                isPathCreated = true;
+            }
 
             if (attempts > 1000) {
                 Debug.Log("CreatePathForAI failed after too many attempts");
                 break;
             }
             attempts++;
-
-
         }
 
         foreach (AStarNode aStarNode in aiPath) {
@@ -229,11 +246,12 @@ public class AStarLite : MonoBehaviour {
     }
 
     Vector3 ConvertGridPositionToWorldPosition(AStarNode aStarNode) {
+        // Debug.Log(aStarNode.gridPosition);
         return new Vector3(aStarNode.gridPosition.x * cellSize - (gridSizeX * cellSize) / 2.0f, aStarNode.gridPosition.y * cellSize - (gridSizeY * cellSize) / 2.0f, 0);
     }
 
     private void OnDrawGizmos() {
-        if(aStarNodes == null) return;
+        if(aStarNodes == null || !isDebugActiveForCar) return;
 
         for (int x = 0; x < gridSizeX; x++) {
             for (int y = 0; y < gridSizeY; y++) {
@@ -246,7 +264,26 @@ public class AStarLite : MonoBehaviour {
         // Draw the nodes that we have checked
         foreach (AStarNode checkedNode in nodesChecked) {
             Gizmos.color = Color.green;
-            Gizmos.DrawSphere(ConvertGridPositionToWorldPosition(checkedNode), 1.0f);
+            // Gizmos.DrawSphere(ConvertGridPositionToWorldPosition(checkedNode), 1.0f);
+
+#if UNITY_EDITOR
+
+            Vector3 labelPosition = ConvertGridPositionToWorldPosition(checkedNode);
+            labelPosition.z = -1;
+            GUIStyle style = new GUIStyle();
+            style.normal.textColor = Color.green;
+            Handles.Label(labelPosition + new Vector3(-0.6f, 1f, 0), $"{checkedNode.hCostDistanceFromGoal}", style);
+
+            style.normal.textColor = Color.red;
+            Handles.Label(labelPosition + new Vector3(0.5f, 1f, 0), $"{checkedNode.gCostDistanceFromStart}", style);
+
+            style.normal.textColor = Color.yellow;
+            Handles.Label(labelPosition + new Vector3(0.5f, -0.5f, 0), $"{checkedNode.pickedOrder}", style);
+
+            style.normal.textColor = Color.white;
+            Handles.Label(labelPosition + new Vector3(0f, 0.2f, 0), $"{checkedNode.fCostTotal}", style);
+
+#endif
         }
 
         // Draw the nodes that we should check
