@@ -5,10 +5,10 @@ using System.Linq;
 using UnityEditor;
 
 public class AStarLite : MonoBehaviour {
-    int gridSizeX = 50;
-    int gridSizeY = 30;
+    public int gridSizeX = 50;
+    public int gridSizeY = 30;
 
-    float cellSize = 2;
+    public float cellSize = 4;
 
     AStarNode[,] aStarNodes;
     AStarNode startNode;
@@ -50,11 +50,14 @@ public class AStarLite : MonoBehaviour {
                     */
 
 
-                    // Ignore Ai cars, they are not pbstacles
+                    // Ignore Ai cars, they are not obstacles
                     if(hitCollider2d.transform.root.CompareTag("AI")) continue;
-                    // Ignore Player cars, they are not pbstacles
+                    // Ignore Player cars, they are not obstacles
                     if(hitCollider2d.transform.root.CompareTag("Player")) continue;
+                    // Ignore Checkpoints, they are not obstacles
+                    if(hitCollider2d.transform.CompareTag("Checkpoint")) continue;
                     aStarNodes[x, y].isObstacle = true;
+
                 }
             }
         }
