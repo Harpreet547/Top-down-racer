@@ -32,7 +32,8 @@ public class CarAIHandler : MonoBehaviour {
     Vector2 avoidanceVectorLerped = Vector3.zero;
 
     // Waypoints
-    WaypointNode currentWaypoint = null;
+    // Can set current waypoint from editor to first waypoint of course. To avoid confusion in race if last waypoint closer then first one
+    public WaypointNode currentWaypoint = null;
     WaypointNode previousWaypoint = null;
     WaypointNode[] allWaypoints;
     CarControllerMark2 carControllerMark2;
@@ -43,14 +44,23 @@ public class CarAIHandler : MonoBehaviour {
     int stuckCheckCounter = 0;
     List<Vector2> temporaryWaypoints = new List<Vector2>();
     AStarLite aStarLite;
-
+    // Check if we are close enough to consider checkpoint reached.
+    public float minDistanceToReactTempWaypoint = 4.5f;
+    
     private void Awake() {
         carControllerMark2 = GetComponent<CarControllerMark2>();
         aStarLite = GetComponent<AStarLite>();
         allWaypoints = FindObjectsOfType<WaypointNode>();
         carCollider = GetComponent<Collider2D>();
-        originalMaxSpeed = carControllerMark2.maxSpeed;;
-        maxSpeed = carControllerMark2.maxSpeed;;
+        originalMaxSpeed = carControllerMark2.maxSpeed;
+        maxSpeed = carControllerMark2.maxSpeed;
+
+        foreach (var waypoint in allWaypoints) {
+            if(waypoint.isFirstWaypoint) {
+                currentWaypoint = waypoint;
+                break;
+            }
+        }
     }
 
     private void Start() {
@@ -96,7 +106,6 @@ public class CarAIHandler : MonoBehaviour {
             previousWaypoint = currentWaypoint;
         }
         if(currentWaypoint == null) return;
-
         targetPosition = currentWaypoint.transform.position;
 
         // store how close we are to the waypoint
@@ -131,11 +140,8 @@ public class CarAIHandler : MonoBehaviour {
         // Drive slower than usual
         // TODO: Set lower speed based on max speed
         SetMaxSpeedBasedOnSkillLevel(originalMaxSpeed / 2);
-
-        // Check if we are close enough to consider checkpoint reached.
-        float minDistanceToReactWaypoint = 1.5f;
-        if(!isFirstTemporaryWaypoint) minDistanceToReactWaypoint = 3.0f;
-
+        float minDistanceToReactWaypoint = minDistanceToReactTempWaypoint;
+        if(!isFirstTemporaryWaypoint) minDistanceToReactWaypoint = minDistanceToReactTempWaypoint * 2;
         if(distanceToWayPoint <= minDistanceToReactWaypoint) {
             temporaryWaypoints.RemoveAt(0);
             isFirstTemporaryWaypoint = false;
@@ -220,7 +226,6 @@ public class CarAIHandler : MonoBehaviour {
         carCollider.enabled = true;
 
         if(raycastHit2d.collider != null) {
-            Debug.Log("Ray hit");
             // Draw a red line showing how long the detection is, make it red since we have detected another car.
             Debug.DrawRay(transform.position, transform.up * 12, Color.red);
             position = raycastHit2d.collider.transform.position;

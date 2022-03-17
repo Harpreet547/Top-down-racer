@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbc8c463f9cbe254a86b37c8f17b803b, type: 3}
-  m_Name: 2_RacerRed
+  m_Name: 1_AIRacer
   m_EditorClassIdentifier: 
-  carUniqueID: 2
-  carUISprite: {fileID: 21300000, guid: 531b292a63164124b9c0460653590ffe, type: 3}
-  carPrefab: {fileID: 911115049631378933, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
+  carUniqueID: 101
+  carUISprite: {fileID: 21300000, guid: 4b13b37682db2f244ba0a28d1e42cc75, type: 3}
+  carPrefab: {fileID: 1063602143389334087, guid: c461e337a9dee8e48a0d2f98d65793cb, type: 3}

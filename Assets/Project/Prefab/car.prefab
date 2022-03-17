@@ -808,7 +808,7 @@ SpriteRenderer:
   m_SortingLayerID: 533592109
   m_SortingLayer: 4
   m_SortingOrder: -99
-  m_Sprite: {fileID: 21300000, guid: 4b13b37682db2f244ba0a28d1e42cc75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 531b292a63164124b9c0460653590ffe, type: 3}
   m_Color: {r: 0.1792453, g: 0.17146672, b: 0.17146672, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5838,7 +5838,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1675304157299017536}
   - component: {fileID: 1675304157299017537}
-  - component: {fileID: 1675304157299017539}
   - component: {fileID: 1675304157299017541}
   - component: {fileID: 1306863646076597182}
   - component: {fileID: 2492923031412312766}
@@ -5846,9 +5845,10 @@ GameObject:
   - component: {fileID: 1675304157299017540}
   - component: {fileID: 1675304157299017543}
   - component: {fileID: 613624387142871808}
+  - component: {fileID: 6394905773516574159}
   m_Layer: 0
   m_Name: car
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5891,20 +5891,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1675304157299017539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675304157299017534}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7d81ffbda5bfb143bdbeef5dd1b0a4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  accelerationPower: 20
-  steeringPower: 2
 --- !u!114 &1675304157299017541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5931,6 +5917,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e6aa8d7b6fd644194cacfc0141cd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiMode: 1
+  avoidanceRadius: 1.2
+  avoidanceCircleOffsetToFront: 0.5
+  isAvoidingCars: 1
+  stuckPositionDelta: 3
+  stuckForTimeBeforeAStar: 0.7
+  skillLevel: 0.3
 --- !u!114 &2492923031412312766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6079,6 +6072,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPositionText: {fileID: 9155474497724929921}
   lapsToComplete: 2
+--- !u!114 &6394905773516574159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675304157299017534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ead1c64d677ffa46801ecb535e6008a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationTransform: {fileID: 0}
+  isDebugActiveForCar: 0
 --- !u!1 &1675304157585303892
 GameObject:
   m_ObjectHideFlags: 0

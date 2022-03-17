@@ -11,21 +11,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 911115048520091133, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 911115048520091133, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 911115048520091133, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 911115048520091133, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 270
+    - target: {fileID: 700845761793169781, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
+      propertyPath: minDistanceToReactTempWaypoint
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 911115049631378827, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
       propertyPath: m_RootOrder
@@ -79,26 +67,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: carAI Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 911115049631378933, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
-      propertyPath: m_TagString
-      value: AI
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
---- !u!1 &1063602143389334087 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 911115049631378933, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
-  m_PrefabInstance: {fileID: 172899083161884594}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5452610466139569939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063602143389334087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ead1c64d677ffa46801ecb535e6008a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
