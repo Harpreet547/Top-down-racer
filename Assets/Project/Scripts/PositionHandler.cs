@@ -6,7 +6,8 @@ using System.Linq;
 public class PositionHandler : MonoBehaviour {
     LeaderboardUIHandler leaderboardUIHandler;
     List<CarLapCounter> carLapCounters = new List<CarLapCounter>();
-    private void Awake() {
+
+    private void Start() {
         CarLapCounter[] carLapCountersArray = FindObjectsOfType<CarLapCounter>();
         carLapCounters = carLapCountersArray.ToList<CarLapCounter>();
 
@@ -16,8 +17,7 @@ public class PositionHandler : MonoBehaviour {
         }
 
         leaderboardUIHandler = FindObjectOfType<LeaderboardUIHandler>();
-    }
-    private void Start() {
+
         leaderboardUIHandler.UpdateList(carLapCounters);
     }
 

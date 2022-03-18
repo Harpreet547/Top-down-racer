@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnCars : MonoBehaviour {
 
     public bool shouldSpawn = true;
-    private void Start() {
+    private void Awake() {
         if(!shouldSpawn) return;
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         CarData[] carDatas = Resources.LoadAll<CarData>("CarData/");
