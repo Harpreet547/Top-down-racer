@@ -9,7 +9,7 @@ public class LeaderboardUIHandler : MonoBehaviour {
     SetLeaderboardInfo[] setLeaderboardInfos;
 
     private void Awake() {
-        InitLeaderboard();
+        // InitLeaderboard();
     }
 
     public void InitLeaderboard() {
@@ -29,6 +29,7 @@ public class LeaderboardUIHandler : MonoBehaviour {
 
     public void UpdateList(List<CarLapCounter> lapCounters) {
         for (int i = 0; i < lapCounters.Count; i++) {
+            Debug.Log(lapCounters[i].gameObject.name);
             setLeaderboardInfos[i].SetNameText(lapCounters[i].gameObject.name);
         }
     }

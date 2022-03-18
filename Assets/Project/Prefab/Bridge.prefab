@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2552054344039240716}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 2552054344965039510}
   m_Layer: 0
   m_Name: UnderpassCollider (1)
-  m_TagString: Untagged
+  m_TagString: UnderpassCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -935,7 +935,7 @@ GameObject:
   - component: {fileID: 2552054345066845771}
   m_Layer: 0
   m_Name: UnderpassCollider (3)
-  m_TagString: Untagged
+  m_TagString: UnderpassCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1262,7 +1262,7 @@ GameObject:
   - component: {fileID: 2552054345317501689}
   m_Layer: 0
   m_Name: UnderpassCollider
-  m_TagString: Untagged
+  m_TagString: UnderpassCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1371,7 +1371,7 @@ GameObject:
   - component: {fileID: 2552054345339205912}
   m_Layer: 0
   m_Name: UnderpassCollider (2)
-  m_TagString: Untagged
+  m_TagString: UnderpassCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
