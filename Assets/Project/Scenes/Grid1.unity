@@ -1468,6 +1468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 4
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 951521141}
 --- !u!4 &171104540
@@ -1763,6 +1764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 1921160477}
 --- !u!4 &283079779
@@ -2000,6 +2002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 850448595}
 --- !u!4 &692649498
@@ -2171,6 +2174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 171104539}
   - {fileID: 951521141}
@@ -4687,6 +4691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 1643815499}
 --- !u!4 &850448596
@@ -4748,6 +4753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 692649497}
 --- !u!1 &995921967
@@ -4905,6 +4911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 283079778}
 --- !u!4 &996469512
@@ -5262,6 +5269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 1695842092}
 --- !u!4 &1643815500
@@ -5433,6 +5441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 1698882885}
 --- !u!4 &1680247644
@@ -5480,6 +5489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 4
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 996469511}
 --- !u!4 &1695842093
@@ -5541,6 +5551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 1680247643}
 --- !u!1001 &1741882099
@@ -5757,6 +5768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 2072730756}
 --- !u!1001 &1855756696
@@ -5991,6 +6003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 744560991}
 --- !u!4 &1921160478
@@ -6208,6 +6221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minDistanceToReactWaypoint: 4
+  isFirstWaypoint: 0
   nextWaypointNode:
   - {fileID: 1796158088}
 --- !u!4 &2072730757
@@ -6335,6 +6349,10 @@ PrefabInstance:
     - target: {fileID: 4570668489919417952, guid: d441a732ee12bed45b5beaa0f8b33003, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570668489919417957, guid: d441a732ee12bed45b5beaa0f8b33003, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d441a732ee12bed45b5beaa0f8b33003, type: 3}

@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="MapStyleSheet.uss" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: center; align-items: center; background-color: rgba(56, 56, 56, 0);">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(241, 35, 35, 0); height: 100%; justify-content: center; align-items: center;">
+            <ui:Button text="Race 1" display-tooltip-when-elided="true" name="Race_1" class="race-button" style="color: rgba(250, 246, 246, 255);" />
+            <ui:Button text="Race 2" display-tooltip-when-elided="true" name="Race_2" class="race-button" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(241, 187, 35, 0); justify-content: center; max-height: 100%; height: 100%; align-items: center;">
+            <ui:Button text="Race 3" display-tooltip-when-elided="true" name="Race_3" class="race-button" />
+            <ui:Button text="Race 4" display-tooltip-when-elided="true" name="Race_4" class="race-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

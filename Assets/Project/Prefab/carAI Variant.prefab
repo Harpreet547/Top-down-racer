@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 700845761793169781, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 700845761793169781, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
       propertyPath: minDistanceToReactTempWaypoint

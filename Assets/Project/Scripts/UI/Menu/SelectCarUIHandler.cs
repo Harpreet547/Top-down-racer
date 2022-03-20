@@ -47,7 +47,7 @@ public class SelectCarUIHandler : MonoBehaviour {
         PlayerPrefs.SetInt("P1SelectedCarID", carDatas[selectedCarIndex].CarUniqueID);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene("SpawnCar");
+        SceneManager.LoadScene("Map");
     }
 
     IEnumerator SpawnCarCO(bool isCarAppearingOnRightSide) {
