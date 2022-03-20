@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/SpawnCar.unity
     guid: fe9cb1675312dbf438c85d9d511f9052
+  - enabled: 1
+    path: Assets/Project/Scenes/Menu.unity
+    guid: 8b00fc1d059030348a896ef8bb09c9ab
+  - enabled: 1
+    path: Assets/Project/Scenes/Map.unity
+    guid: 49203b87c12219c448b30b89e6962fa6
   m_configObjects: {}
