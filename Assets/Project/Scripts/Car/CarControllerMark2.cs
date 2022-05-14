@@ -32,10 +32,14 @@ public class CarControllerMark2 : MonoBehaviour {
     Collider2D carCollider;
     CarSFXHandler carSFXHandler;
 
+    // Engine
+    Engine engine;
+
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         carCollider = GetComponent<Collider2D>();
         carSFXHandler = GetComponent<CarSFXHandler>();
+        engine = GetComponent<Engine>();
     }
 
     private void Start() {
@@ -52,13 +56,13 @@ public class CarControllerMark2 : MonoBehaviour {
         // Don't let the player brake while in air, but we still allow some drag so it can be slowed slightly.
         if(isJumping && accelerationInput < 0) accelerationInput = 0;
 
-        // Calculate how much forwad we are going in term of the direction of our velocity.
+        // Calculate how much forward we are going in term of the direction of our velocity.
         velocityVSUp = Vector2.Dot(transform.up, rb.velocity);
 
         // Limit forward velocity to maxSpeed.
         if(velocityVSUp > maxSpeed && accelerationInput > 0) return;
         // Limit reverse velocity to maxSpeed / reverseGearSpeedFactor.
-        if(velocityVSUp < (-maxSpeed * reverseGearSpeedFactor) && accelerationInput > 0) return;
+        if(velocityVSUp < (-maxSpeed * reverseGearSpeedFactor) && accelerationInput < 0) return;
         // Limit so that we cannot go faster in any direction while accelerating.
         if(rb.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0 && !isJumping) return;
 
@@ -69,6 +73,8 @@ public class CarControllerMark2 : MonoBehaviour {
         else
             rb.drag = 0;
 
+        // engine.GetAcceleration(accelerationFactor, accelerationInput, velocityVSUp);
+
         Vector2 engineForceVector = accelerationInput * accelerationFactor * transform.up;
         rb.AddForce(engineForceVector, ForceMode2D.Force);
     }
@@ -78,7 +84,7 @@ public class CarControllerMark2 : MonoBehaviour {
         float minSpeedBeforeAllowTurningFactor = (rb.velocity.magnitude / minSpeedTurningConstant);
         minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
 
-        rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor * (accelerationInput >= 0 ? 1 : -1);
+        rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor * (accelerationInput >= 0 || velocityVSUp > 0 ? 1 : -1);
         rb.MoveRotation(rotationAngle);
     }
 
