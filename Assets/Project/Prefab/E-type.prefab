@@ -5846,6 +5846,7 @@ GameObject:
   - component: {fileID: 1675304157299017543}
   - component: {fileID: 613624387142871808}
   - component: {fileID: 6394905773516574159}
+  - component: {fileID: 89411784589789987}
   m_Layer: 0
   m_Name: E-type
   m_TagString: Player
@@ -5953,12 +5954,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationFactor: 15
   maxSpeed: 20
+  brakeToAccelerationRatio: 0.3
   turnFactor: 3.5
   driftFactor: 0.95
   minSpeedTurningConstant: 8
+  drag: 2
   dragFactor: 3
   reverseGearSpeedFactor: 0.3
   driftSpeedForSkidmarks: 4
+  maxSpeedSteerFactor: 0.7
+  onHandbrakeSteeringIncreaseFactor: 2
+  onHandbrakeEngineForceDecreaseFactor: 3
+  onTireScreechVelocityDecreaseFactor: 1.5
   carSpriteRenderer: {fileID: 1675304156196040505}
   carShadowRenderer: {fileID: 1675304156701286418}
   jumpCurve:
@@ -6091,6 +6098,57 @@ MonoBehaviour:
   cellSize: 4
   destinationTransform: {fileID: 0}
   isDebugActiveForCar: 0
+--- !u!114 &89411784589789987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675304157299017534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406480a3c32c5c6458262bd670b6d73a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1300
+      value: 40
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  tireDiameter: 16
+  smoothTime: 0.01
+  gears:
+  - 1.7
+  - 1.3
+  - 1
+  - 0.7
+  - 0.5
+  minRPMToShiftUp: 1200
+  maxRPMToShiftDown: 600
+  velocityInKPH: 0
+  wheelsRPM: 0
+  engineRPM: 0
+  totalPower: 0
+  currentGear: 0
 --- !u!1 &1675304157585303892
 GameObject:
   m_ObjectHideFlags: 0

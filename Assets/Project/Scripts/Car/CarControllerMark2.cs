@@ -6,6 +6,7 @@ public class CarControllerMark2 : MonoBehaviour {
     [Header("Car settings")]
     public float accelerationFactor = 30.0f;
     public float maxSpeed = 20f;
+    public float brakeForce = 10.0f;
     [Range(0, 1)]
     public float brakeToAccelerationRatio = 0.3f;
     public float turnFactor = 3.5f;
@@ -19,6 +20,7 @@ public class CarControllerMark2 : MonoBehaviour {
     public float onHandbrakeSteeringIncreaseFactor = 2;
     public float onHandbrakeEngineForceDecreaseFactor = 3;
     public float onTireScreechVelocityDecreaseFactor = 1.5f;
+    public float onBrakeSteeringReductionFactor = 0.5f;
 
     [Header("Sprites")]
     public SpriteRenderer carSpriteRenderer;
@@ -90,7 +92,11 @@ public class CarControllerMark2 : MonoBehaviour {
         Vector2 engineForceVector = enginePower * accelerationInput * transform.up;
         // Velocity descrease factor if handbrake is pressed.
         if(isHandbrakePressed) engineForceVector /= onHandbrakeEngineForceDecreaseFactor;
-        if(accelerationInput < 0) engineForceVector *= brakeToAccelerationRatio;
+        if(accelerationInput < 0) {
+            // engineForceVector *= brakeToAccelerationRatio;
+
+            engineForceVector = brakeForce * -transform.up;
+        }
         // Velocity decrease factor if tires are screeching.
         // TODO: At max velocity, speed is not decreasing if tires are screeching
         if(IsTireScreeching(out float lateralVelocity, out bool isBraking)) engineForceVector /= onTireScreechVelocityDecreaseFactor;
@@ -110,7 +116,7 @@ public class CarControllerMark2 : MonoBehaviour {
         
         // Car turns faster if handbrake is pressed.
         if(isHandbrakePressed) steeringAdjustment *= onHandbrakeSteeringIncreaseFactor;
-        
+        if(accelerationInput < 0) steeringAdjustment = steeringAdjustment * onBrakeSteeringReductionFactor * (1 - Mathf.Abs(accelerationInput) + 0.5f);
         rotationAngle -= steeringAdjustment;
         rb.MoveRotation(rotationAngle);
     }
