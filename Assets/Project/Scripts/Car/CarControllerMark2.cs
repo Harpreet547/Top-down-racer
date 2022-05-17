@@ -6,12 +6,19 @@ public class CarControllerMark2 : MonoBehaviour {
     [Header("Car settings")]
     public float accelerationFactor = 30.0f;
     public float maxSpeed = 20f;
+    [Range(0, 1)]
+    public float brakeToAccelerationRatio = 0.3f;
     public float turnFactor = 3.5f;
     public float driftFactor = 0.95f;
     public float minSpeedTurningConstant = 8;
-    public float dragFactor = 3.0f;
+    public float drag = 2;
+    public float dragFactor = 4.0f;
     public float reverseGearSpeedFactor = 0.3f;
     public float driftSpeedForSkidmarks = 4.0f;
+    public float maxSpeedSteerFactor = 0.7f;
+    public float onHandbrakeSteeringIncreaseFactor = 2;
+    public float onHandbrakeEngineForceDecreaseFactor = 3;
+    public float onTireScreechVelocityDecreaseFactor = 1.5f;
 
     [Header("Sprites")]
     public SpriteRenderer carSpriteRenderer;
@@ -26,6 +33,7 @@ public class CarControllerMark2 : MonoBehaviour {
     float accelerationInput = 0;
     float steeringInput = 0;
     float rotationAngle = 0;
+    bool isHandbrakePressed = false;
     float velocityVSUp = 0;
     bool isJumping = false;
     Rigidbody2D rb;
@@ -71,11 +79,21 @@ public class CarControllerMark2 : MonoBehaviour {
         if(accelerationInput == 0)
             rb.drag = Mathf.Lerp(rb.drag, dragFactor, Time.fixedDeltaTime * dragFactor);
         else
-            rb.drag = 0;
+            rb.drag = drag;
 
-        // engine.GetAcceleration(accelerationFactor, accelerationInput, velocityVSUp);
+        float enginePower = engine.GetAcceleration(accelerationFactor, accelerationInput, velocityVSUp);
 
-        Vector2 engineForceVector = accelerationInput * accelerationFactor * transform.up;
+        // Original code to calculate engineForceVector----------------------------------------------
+        // Vector2 engineForceVector = accelerationInput * accelerationFactor * transform.up;
+        // ------------------------------------------------------------------------------------------
+
+        Vector2 engineForceVector = enginePower * accelerationInput * transform.up;
+        // Velocity descrease factor if handbrake is pressed.
+        if(isHandbrakePressed) engineForceVector /= onHandbrakeEngineForceDecreaseFactor;
+        if(accelerationInput < 0) engineForceVector *= brakeToAccelerationRatio;
+        // Velocity decrease factor if tires are screeching.
+        // TODO: At max velocity, speed is not decreasing if tires are screeching
+        if(IsTireScreeching(out float lateralVelocity, out bool isBraking)) engineForceVector /= onTireScreechVelocityDecreaseFactor;
         rb.AddForce(engineForceVector, ForceMode2D.Force);
     }
 
@@ -84,7 +102,16 @@ public class CarControllerMark2 : MonoBehaviour {
         float minSpeedBeforeAllowTurningFactor = (rb.velocity.magnitude / minSpeedTurningConstant);
         minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
 
-        rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor * (accelerationInput >= 0 || velocityVSUp > 0 ? 1 : -1);
+        // Reduce steering as speed increases
+        float maxSpeedTurningFactor = (1 - Mathf.Clamp01(rb.velocity.magnitude / maxSpeed)) + maxSpeedSteerFactor;
+
+        // rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor * maxSpeedTurningFactor * (accelerationInput >= 0 || velocityVSUp > 0 ? 1 : -1);
+        float steeringAdjustment= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor * maxSpeedTurningFactor * (accelerationInput >= 0 || velocityVSUp > 0 ? 1 : -1);
+        
+        // Car turns faster if handbrake is pressed.
+        if(isHandbrakePressed) steeringAdjustment *= onHandbrakeSteeringIncreaseFactor;
+        
+        rotationAngle -= steeringAdjustment;
         rb.MoveRotation(rotationAngle);
     }
 
@@ -95,9 +122,10 @@ public class CarControllerMark2 : MonoBehaviour {
         rb.velocity = forwardVelocity + rightVelocity * driftFactor;
     }
 
-    public void SetInputVector(Vector2 inputVector) {
+    public void SetInputVector(Vector2 inputVector, bool isEBreakPressed) {
         steeringInput = inputVector.x;
         accelerationInput = inputVector.y;
+        isHandbrakePressed = isEBreakPressed;
     }
 
     float GetLateralVelocity() {
@@ -116,10 +144,10 @@ public class CarControllerMark2 : MonoBehaviour {
             return true;
         }
 
-        // if(accelerationInput > 0 && velocityVSUp < 0) {
-        //     isBraking = true;
-        //     return true;
-        // }
+        if(accelerationInput > 0 && velocityVSUp < 0) {
+            isBraking = true;
+            return true;
+        }
 
         // If we have lot of sideways movement then tires should be screeching
         if(Mathf.Abs(GetLateralVelocity()) > driftSpeedForSkidmarks) return true;
