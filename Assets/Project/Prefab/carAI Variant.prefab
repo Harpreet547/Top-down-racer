@@ -165,3 +165,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
+--- !u!1 &1063602143389334087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 911115049631378933, guid: f7e34313ff27a4f498635c28f4fb1f36, type: 3}
+  m_PrefabInstance: {fileID: 172899083161884594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6399421844456943598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063602143389334087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406480a3c32c5c6458262bd670b6d73a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1500
+      value: 50
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  tireDiameter: 16
+  smoothTime: 0.01
+  gears:
+  - 1.7
+  - 1.5
+  - 1
+  - 0.7
+  - 0.5
+  minRPMToShiftUp: 1200
+  maxRPMToShiftDown: 600
+  velocityInKPH: 0
+  wheelsRPM: 0
+  engineRPM: 0
+  totalPower: 0
+  currentGear: 0
