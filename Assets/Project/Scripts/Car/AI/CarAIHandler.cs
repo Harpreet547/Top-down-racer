@@ -90,7 +90,8 @@ public class CarAIHandler : MonoBehaviour {
         // Handle special case where car has reversed for a while then it should check if it is still stuck. If it is not then it will drive forward again.
         if(stuckCheckCounter >= 4 && !isRunningStuckCheck) StartCoroutine(StuckCheckCO());
 
-        carControllerMark2.SetInputVector(inputVector);
+        // TODO: AI does not press handbreaks
+        carControllerMark2.SetInputVector(inputVector, false);
     }
 
     void FollowPlayer() {

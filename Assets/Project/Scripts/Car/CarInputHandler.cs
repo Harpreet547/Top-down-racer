@@ -17,7 +17,7 @@ public class CarInputHandler : MonoBehaviour {
 
     private void Update() {
         if(isUIInput) {
-            carControllerMark2.SetInputVector(inputVector);
+            carControllerMark2.SetInputVector(inputVector, false);
             return;
         }
 
@@ -43,7 +43,8 @@ public class CarInputHandler : MonoBehaviour {
             default:
                 break;
         }
-        carControllerMark2.SetInputVector(inputVector);
+        bool isHandbrakePressed = Input.GetButton("Handbrake");
+        carControllerMark2.SetInputVector(inputVector, isHandbrakePressed);
     }
 
     public void SetInput(Vector2 newInput) {
