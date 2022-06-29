@@ -76,13 +76,6 @@ public class CarControllerMark2 : MonoBehaviour {
         // Limit so that we cannot go faster in any direction while accelerating.
         if(rb.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0 && !isJumping) return;
 
-        // Apply drag  if there is no accelerationInput so that the car stops when player lets go of the acceleration.
-        // Time.fixedDeltaTime * dragFactor, here drag factor default value was 3 in tutorial. This could be different from drag factor. Depends upon future testing.
-        if(accelerationInput == 0)
-            rb.drag = Mathf.Lerp(rb.drag, dragFactor, Time.fixedDeltaTime * dragFactor);
-        else
-            rb.drag = drag;
-
         float enginePower = engine.GetAcceleration(accelerationFactor, accelerationInput, velocityVSUp);
 
         // Original code to calculate engineForceVector----------------------------------------------
@@ -92,11 +85,18 @@ public class CarControllerMark2 : MonoBehaviour {
         Vector2 engineForceVector = enginePower * accelerationInput * transform.up;
         // Velocity descrease factor if handbrake is pressed.
         if(isHandbrakePressed) engineForceVector /= onHandbrakeEngineForceDecreaseFactor;
+
+        // Apply drag  if there is no accelerationInput so that the car stops when player lets go of the acceleration.
+        // Time.fixedDeltaTime * dragFactor, here drag factor default value was 3 in tutorial. This could be different from drag factor. Depends upon future testing.
         if(accelerationInput < 0) {
             // engineForceVector *= brakeToAccelerationRatio;
-
+            rb.drag = 0;
             engineForceVector = brakeForce * -transform.up;
-        }
+        } else if(accelerationInput == 0)
+            rb.drag = Mathf.Lerp(rb.drag, dragFactor, Time.fixedDeltaTime * dragFactor);
+        else
+            rb.drag = drag;
+
         // Velocity decrease factor if tires are screeching.
         // TODO: At max velocity, speed is not decreasing if tires are screeching
         if(IsTireScreeching(out float lateralVelocity, out bool isBraking)) engineForceVector /= onTireScreechVelocityDecreaseFactor;
@@ -116,7 +116,7 @@ public class CarControllerMark2 : MonoBehaviour {
         
         // Car turns faster if handbrake is pressed.
         if(isHandbrakePressed) steeringAdjustment *= onHandbrakeSteeringIncreaseFactor;
-        if(accelerationInput < 0) steeringAdjustment = steeringAdjustment * onBrakeSteeringReductionFactor * (1 - Mathf.Abs(accelerationInput) + 0.5f);
+        if(accelerationInput < 0) steeringAdjustment = steeringAdjustment * onBrakeSteeringReductionFactor;
         rotationAngle -= steeringAdjustment;
         rb.MoveRotation(rotationAngle);
     }
